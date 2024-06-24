@@ -17,7 +17,7 @@ describe('getTemplatePath', () => {
         adapter.getTemplatePath()
       );
 
-      expect(templatePath).toBe('../../src/migrationTemplates/async.ts');
+      expect(templatePath).toBe('../../migrationTemplates/async.ts');
     });
   });
 });

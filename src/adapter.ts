@@ -18,17 +18,8 @@ class MongoAdapter implements Adapter<MongoClient> {
     }
   }
 
-  async isConnected(): Promise<boolean> {
-    try {
-      const count = await this.collection.estimatedDocumentCount();
-      return !isNaN(count);
-    } catch (e) {
-      return false;
-    }
-  }
-
   getTemplatePath(): string {
-    return path.join(__dirname, 'migrationTemplates', 'async.ts');
+    return path.join(__dirname, '../migrationTemplates', 'async.ts');
   }
 
   async connect(): Promise<MongoClient> {
