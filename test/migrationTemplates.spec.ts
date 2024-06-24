@@ -3,7 +3,7 @@ import path from 'path';
 describe('migrationTemplates', () => {
   const templatesPath = path.resolve(
     __dirname,
-    '../src/migrationTemplates'
+    '../migrationTemplates'
   );
 
   it('can load async template', async () => {

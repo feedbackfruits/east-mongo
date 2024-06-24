@@ -8,7 +8,7 @@
     "type": "git",
     "url": "git://github.com/feedbackfruits/east-mongo.git"
   },
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "keywords": [
     "database",
     "db",
@@ -22,7 +22,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "lint": "eslint \"./src/**/*.ts\" --max-warnings 0 --ignore-pattern \"src/migrationTemplates/**/*.ts\"",
+    "lint": "eslint \"./src/**/*.ts\" --max-warnings 0",
     "lint:tests": "eslint \"./test/**/*.ts\" --max-warnings 0",
     "test": "NODE_ENV=test nyc tsx node_modules/jasmine/bin/jasmine \"test/**/*.spec.ts\""
   },

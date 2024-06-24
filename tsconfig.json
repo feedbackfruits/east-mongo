@@ -8,7 +8,7 @@
     "isolatedModules": false,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "declaration": false,
+    "declaration": true,
     "sourceMap": true,
     "exactOptionalPropertyTypes": false,
     "strictNullChecks": false,
@@ -31,11 +31,7 @@
     "test/**/*.ts",
     "node_modules",
     "typings/browser",
-    "typings/browser.d.ts"
-  ],
-  "compileOnSave": true,
-  "buildOnSave": false,
-  "atom": {
-    "rewriteTsconfig": false
-  }
+    "typings/browser.d.ts",
+    "migrationTemplates"
+  ]
 }
