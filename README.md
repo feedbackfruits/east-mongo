@@ -1,34 +1,17 @@
 # east mongo
 
-mongodb adapter for [east](https://github.com/okv/east) (node.js database migration tool) which uses 
-[mongodb native driver](http://mongodb.github.io/node-mongodb-native/)
+> [!NOTE]
+> This is a fork from https://github.com/okv/east-mongo, continued in Typescript with current versions of MongoDB
 
-*Please note* that mainstream mongodb adapter version (>= 1.x) requires
-east >= 1.x, for using adapter with older east versions (prior to 1.x) please
-use mongodb adapter version < 1.x.
+Mongodb adapter for [east](https://github.com/okv/east), a Node.js database migration tool, which uses 
+the [mongodb native driver](http://mongodb.github.io/node-mongodb-native/) to perform migrations.
 
 All executed migrations names will be stored at `_migrations` collection in the
-current database. Object with following properties will be passed to `migrate`
-and `rollback` functions:
+current database, where the `_id` for each document is the name of the executed migration. A pre-connected instance of `MongoClient` will be passed in to these migrations.
 
-* `db` - instance of [mongodb native db](http://mongodb.github.io/node-mongodb-native/3.5/api/Db.html)
-* `dropIndexIfExists` function(collection, index, [callback]) - helper function
-which can be used for dropping index in safe way (contrasting to 
-`collection.dropIndex` which throws an error if index doesn't exist). This
-function returns promise and can be used that way instead of providing
-callback.
+`east-mongo` also provides a template for use with migrations at [lib/migrationTemplates/async.js](lib/migrationTemplates/async.js).
 
-east mongo package also provides following migration templates:
-
-* [lib/migrationTemplates/promises.js](lib/migrationTemplates/promises.js) -
-default migration template, uses built-in `Promise` in `migrate`,
-`rollback` functions.
-* [lib/migrationTemplates/async.js](lib/migrationTemplates/async.js) -
-migration template that uses async functions to describe `migrate`,
-`rollback` functions.
-
-Default migration template will be used if `template` is not set. To get path
-of another template `require.resolve` could be used, e.g. at `.eastrc`:
+This default migration template will be used if `template` is not set. To override this behaviour and provide your own template, set `template` in your `.eastrc` file to the path of your template file:
 
 ```js
 	module.exports = {
@@ -36,27 +19,32 @@ of another template `require.resolve` could be used, e.g. at `.eastrc`:
 	}
 ```
 
-[![Npm version](https://img.shields.io/npm/v/east-mongo.svg)](https://www.npmjs.org/package/east-mongo)
-[![Build Status](https://travis-ci.org/okv/east-mongo.svg?branch=master)](https://travis-ci.org/okv/east-mongo)
-[![Coverage Status](https://coveralls.io/repos/github/okv/east-mongo/badge.svg?branch=master)](https://coveralls.io/github/okv/east-mongo?branch=master)
-[![Known Vulnerabilities](https://snyk.io/test/npm/east-mongo/badge.svg)](https://snyk.io/test/npm/east-mongo)
+or in Typescript
+```ts
+export default {
+  template: require.resolve('east-mongo/lib/migrationTemplates/async.ts')
+}
+```
 
+[![npm](https://img.shields.io/npm/v/@feedbackfruits/east-mongo.svg)](https://www.npmjs.org/package/@feedbackfruits/east-mongo)
 
-## Node.js compatibility
+## Node.js compatibility & MongoDB Driver compatibility
 
-east mongo requires node.js >= 4 to work.
+east-mongo supports current, active and maintenance versions of node.js: https://nodejs.org/en/about/previous-releases
+Currently this means this package is tested against versions 18, 20 and 22.
+
+For the MongoDB drivers, we follow language compatibility matrix from MongoDB: https://www.mongodb.com/docs/drivers/node/current/compatibility/#language-compatibility
+This currently means the minimum supported version is 4.x
 
 ## Installation
 
-mongodb adapter requires `mongodb` package as peer dependency (versions 2.x and
-3.x are supported), so you should install it manually along side with east:
+mongodb adapter requires `mongodb` package as peer dependency, so you should install it manually along side with east:
 
 ```sh
-npm install east east-mongo mongodb@3
+npm install east @feedbackfruits/east-mongo mongodb
+# or 
+yarn add east @feedbackfruits/east-mongo mongodb
 ```
-
-alternatively you could install it globally
-
 
 ## Usage
 
@@ -64,7 +52,7 @@ Sample `.eastrc` content:
 
 ```js
 {
-	"adapter": "east-mongo",
+	"adapter": "@feedbackfruits/east-mongo",
 	"url": "mongodb://localhost:27017/test",
 	"options": {
 		"server": {
@@ -76,26 +64,32 @@ Sample `.eastrc` content:
 }
 ```
 
-where `url` is url of database which you want to migrate (in 
+Alternatively, pass in the options through the CLI:
+  
+```sh
+east migrate --adapter east-mongo --url $MONGODB_URI
+# or, to run TS migrations
+yarn add -DE tsx
+tsx node_modules/east/bin/east.js migrate --adapter east-mongo --url $MONGODB_URI --migration-extension ts
+```
+
+Where `url` is url of database which you want to migrate (in 
 [mongodb native url connection format](http://mongodb.github.io/node-mongodb-native/driver-articles/mongoclient.html#the-url-connection-format)) and `options` is optional settings
 (see [connect method specification](http://mongodb.github.io/node-mongodb-native/3.5/api/MongoClient.html#.connect)).
 
-Migration files created with default `template` that comes with adapter will
-look like:
+Migration files created with default `template` that comes with adapter will look like:
 
 ```js
+import type { MongoClient } from 'mongodb';
+
 exports.tags = [];
 
-exports.migrate = function(params) {
-	const db = params.db;
-
-	return Promise.resolve();
+exports.migrate = async (client: MongoClient) => {
+  // Migration definition
 };
 
-exports.rollback = function(params) {
-	const db = params.db;
-
-	return Promise.resolve();
+exports.rollback = async (client: MongoClient) => {
+  // Rollback definitions
 };
 ```
 
@@ -106,4 +100,3 @@ See east [cli](https://github.com/okv/east#cli-usage) or
 ## License
 
 MIT
-

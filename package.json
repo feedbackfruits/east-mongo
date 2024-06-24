@@ -1,12 +1,12 @@
 {
-  "name": "east-mongo",
+  "name": "@feedbackfruits/east-mongo",
   "description": "mongodb adapter for east (node.js database migration tool)",
+  "author": "FeedbackFruits <media@feedbackfruits.com>",
   "version": "1.0.0",
-  "author": "Oleg Korobenko <oleg.korobenko@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/okv/east-mongo.git"
+    "url": "git://github.com/feedbackfruits/east-mongo.git"
   },
   "main": "lib/index.js",
   "keywords": [
@@ -16,33 +16,40 @@
     "mongo",
     "mongodb"
   ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "scripts": {
-    "test": "tape \"test/**/*.test.js\" | tap_bail | tap-dot",
-    "testWithoutBail": "tape \"test/**/*.test.js\" | tap-dot",
-    "makeCodeCoverageSummaryReport": "nyc --reporter text-summary npm test",
-    "makeCodeCoverageDetailReport": "nyc --reporter=lcov --reporter html npm test",
-    "lint": "eslint ./"
+    "build": "tsc",
+    "lint": "eslint \"./src/**/*.ts\" --max-warnings 0 --ignore-pattern \"src/migrationTemplates/**/*.ts\"",
+    "lint:tests": "eslint \"./test/**/*.ts\" --max-warnings 0",
+    "test": "NODE_ENV=test nyc tsx node_modules/jasmine/bin/jasmine \"test/**/*.spec.ts\""
   },
   "peerDependencies": {
-    "mongodb": "2.x.x || 3.x.x"
+    "east": ">=2.0.0",
+    "mongodb": ">=4.0.0"
   },
   "devDependencies": {
-    "blue-tape": "1.0.0",
-    "coveralls": "3.0.9",
-    "es6-promisify": "6.0.2",
-    "eslint": "4.19.1",
-    "eslint-config-airbnb-base": "12.1.0",
-    "eslint-plugin-import": "2.18.2",
-    "mongodb": "2.x.x || 3.x.x",
-    "nyc": "14.1.1",
-    "tap-dot": "2.0.0",
-    "tap_bail": "1.0.1",
-    "tape": "4.11.0",
-    "tape-catch": "1.0.6",
-    "tape-promise": "4.0.0"
+    "@feedbackfruits/eslint-config": "1.0.2",
+    "@feedbackfruits/tsconfig": "1.0.2",
+    "@types/jasmine": "5.1.4",
+    "@types/node": "20.14.8",
+    "@typescript-eslint/eslint-plugin": "7.13.1",
+    "@typescript-eslint/parser": "7.13.1",
+    "east": "2.0.3",
+    "eslint": "8.57.0",
+    "eslint-plugin-import": "2.29.1",
+    "eslint-plugin-jasmine": "4.2.0",
+    "jasmine": "5.1.0",
+    "jasmine-spec-reporter": "7.0.0",
+    "mongodb": "6.7.0",
+    "nyc": "17.0.0",
+    "tsx": "4.15.7",
+    "typescript": "5.5.2"
   },
-  "dependencies": {},
   "engines": {
-    "node": ">=4.0.0"
-  }
+    "node": ">=18.0.0"
+  },
+  "packageManager": "yarn@4.3.1"
 }

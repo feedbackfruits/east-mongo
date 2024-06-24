@@ -1,0 +1,16 @@
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+  - package-ecosystem: "npm"
+    directory: "/functions"
+    schedule:
+      interval: "monthly"
+    rebase-strategy: "auto"
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    rebase-strategy: "auto"
