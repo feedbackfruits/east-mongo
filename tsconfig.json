@@ -1,0 +1,41 @@
+{
+  "extends": "@feedbackfruits/tsconfig",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": false,
+    "noImplicitAny": false,
+    "isolatedModules": false,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "declaration": false,
+    "sourceMap": true,
+    "exactOptionalPropertyTypes": false,
+    "strictNullChecks": false,
+    "noImplicitUseStrict": false,
+    "removeComments": true,
+    "skipLibCheck": true,
+    "noLib": false,
+    "preserveConstEnums": true,
+    "noImplicitReturns": false,
+    "types": [
+      "node",
+      "jasmine"
+    ]
+  },
+  "filesGlob": [
+    "src/**/*.ts",
+    "typings/tsd.d.ts"
+  ],
+  "exclude": [
+    "test/**/*.ts",
+    "node_modules",
+    "typings/browser",
+    "typings/browser.d.ts"
+  ],
+  "compileOnSave": true,
+  "buildOnSave": false,
+  "atom": {
+    "rewriteTsconfig": false
+  }
+}
