@@ -2,7 +2,7 @@
   "name": "@feedbackfruits/east-mongo",
   "description": "mongodb adapter for east (node.js database migration tool)",
   "author": "FeedbackFruits <media@feedbackfruits.com>",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
   "repository": {
     "type": "git",
