@@ -45,7 +45,7 @@
     "jasmine-spec-reporter": "7.0.0",
     "mongodb": "6.7.0",
     "nyc": "17.0.0",
-    "tsx": "4.15.7",
+    "tsx": "4.16.0",
     "typescript": "5.5.2"
   },
   "engines": {
