@@ -35,7 +35,7 @@
     "@feedbackfruits/tsconfig": "1.0.2",
     "@types/jasmine": "5.1.4",
     "@types/node": "20.14.8",
-    "@typescript-eslint/eslint-plugin": "7.13.1",
+    "@typescript-eslint/eslint-plugin": "7.14.1",
     "@typescript-eslint/parser": "7.13.1",
     "east": "2.0.3",
     "eslint": "8.57.0",
