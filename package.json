@@ -43,7 +43,7 @@
     "eslint-plugin-jasmine": "4.2.0",
     "jasmine": "5.1.0",
     "jasmine-spec-reporter": "7.0.0",
-    "mongodb": "6.7.0",
+    "mongodb": "6.8.0",
     "nyc": "17.0.0",
     "tsx": "4.15.7",
     "typescript": "5.5.2"
