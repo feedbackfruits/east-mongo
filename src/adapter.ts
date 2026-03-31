@@ -53,7 +53,6 @@ class MongoAdapter implements Adapter<MongoClient> {
 }
 
 // Type checking for the constructor
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const _: AdapterConstructor<MongoClient> = MongoAdapter;
 
 export default MongoAdapter;

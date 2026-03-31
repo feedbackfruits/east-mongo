@@ -45,7 +45,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
       - name: Install MongoDB driver
-        run: pnpm add -DE mongodb@${{ matrix.mongodb_driver_version }}; pnpm
+        run: pnpm add -DE mongodb@${{ matrix.mongodb_driver_version }}; pnpm install
       - name: Compile app
         run: pnpm build
       - uses: supercharge/mongodb-github-action@1.12.1
