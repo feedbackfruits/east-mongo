@@ -1,5 +1,7 @@
 # east-mongo
 
+[![npm](https://img.shields.io/npm/v/@feedbackfruits/east-mongo.svg)](https://www.npmjs.org/package/@feedbackfruits/east-mongo)
+
 > [!NOTE]
 > This is a fork from https://github.com/okv/east-mongo, continued in Typescript with current versions of MongoDB
 
@@ -25,12 +27,9 @@ export default {
 }
 ```
 
-[![npm](https://img.shields.io/npm/v/@feedbackfruits/east-mongo.svg)](https://www.npmjs.org/package/@feedbackfruits/east-mongo)
-
 ## Node.js compatibility & MongoDB Driver compatibility
 
-east-mongo supports current, active and maintenance versions of node.js: https://nodejs.org/en/about/previous-releases
-Currently this means this package is tested against versions 22 and 24.
+east-mongo supports current, active and maintenance versions of node.js: https://nodejs.org/en/about/previous-releases. Currently this means this package is tested against versions 22 and 24.
 
 For the MongoDB version, we follow the support matrix and maintenance lifecycle:
 - Lifecycle: https://www.mongodb.com/legal/support-policy/lifecycles
