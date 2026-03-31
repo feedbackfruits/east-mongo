@@ -11,5 +11,6 @@ src/
 .github
 .yarnrc.yml
 .yarn
+pnpm-workspace.yaml
 .editorconfig
 tsconfig.json
