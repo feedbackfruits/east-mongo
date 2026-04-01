@@ -6,6 +6,10 @@ on:
       - main
       - master
 
+permissions:
+  id-token: write
+  contents: read
+
 env:
   NODE_VERSION: '24'
 
@@ -44,5 +48,3 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
       - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
