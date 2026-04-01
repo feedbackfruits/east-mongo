@@ -3,43 +3,40 @@
 [![npm](https://img.shields.io/npm/v/@feedbackfruits/east-mongo.svg)](https://www.npmjs.org/package/@feedbackfruits/east-mongo)
 
 > [!NOTE]
-> This is a fork from https://github.com/okv/east-mongo, continued in Typescript with current versions of MongoDB
+> This is a fork of [okv/east-mongo](https://github.com/okv/east-mongo), rewritten in TypeScript and kept up to date with current MongoDB driver versions.
 
-Mongodb adapter for [east](https://github.com/okv/east), a Node.js database migration tool, which uses the [mongodb native driver](http://mongodb.github.io/node-mongodb-native/) to perform migrations.
+A MongoDB adapter for [east](https://github.com/okv/east), the Node.js database migration tool. It uses the [MongoDB Node.js driver](http://mongodb.github.io/node-mongodb-native/) under the hood and passes a pre-connected `MongoClient` instance directly into each migration.
 
-All executed migrations names will be stored at `_migrations` collection in the
-current database, where the `_id` for each document is the name of the executed migration. A pre-connected instance of `MongoClient` will be passed in to these migrations.
+Executed migration names are tracked in a `_migrations` collection in the target database, with each document's `_id` set to the migration name.
 
-`east-mongo` also provides a template for use with migrations at [lib/migrationTemplates/async.js](lib/migrationTemplates/async.js).
-
-This default migration template will be used if `template` is not set. To override this behaviour and provide your own template, set `template` in your `.eastrc` file to the path of your template file:
+A default migration template is included at [migrationTemplates/async.ts](migrationTemplates/async.ts) and will be used automatically unless you override it. To use a custom template, set `template` in your `.eastrc`:
 
 ```js
 module.exports = {
-  template: require.resolve('east-mongo/lib/migrationTemplates/async.js')
+  template: require.resolve('@feedbackfruits/east-mongo/migrationTemplates/async.ts')
 }
 ```
 
-or in Typescript
+or in TypeScript:
 ```ts
 export default {
-  template: require.resolve('east-mongo/lib/migrationTemplates/async.ts')
+  template: require.resolve('@feedbackfruits/east-mongo/migrationTemplates/async.ts')
 }
 ```
 
-## Node.js compatibility & MongoDB Driver compatibility
+## Compatibility
 
-east-mongo supports current, active and maintenance versions of node.js: https://nodejs.org/en/about/previous-releases. Currently this means this package is tested against versions 22 and 24.
+east-mongo targets the [current, active, and maintenance releases of Node.js](https://nodejs.org/en/about/previous-releases) — currently tested against versions 22 and 24.
 
-For the MongoDB version, we follow the support matrix and maintenance lifecycle:
-- Lifecycle: https://www.mongodb.com/legal/support-policy/lifecycles
-- Driver support matrix: https://www.mongodb.com/docs/drivers/compatibility/?driver-language=javascript&javascript-driver-framework=nodejs#mongodb-server-compatibility-11
+For MongoDB, we follow the official driver support matrix:
+- [MongoDB lifecycle policy](https://www.mongodb.com/legal/support-policy/lifecycles)
+- [Node.js driver compatibility matrix](https://www.mongodb.com/docs/drivers/compatibility/?driver-language=javascript&javascript-driver-framework=nodejs#mongodb-server-compatibility-11)
 
-This currently means the minimum supported server version is 7.0, and the minimum supported driver version is 5.7.
+The minimum supported MongoDB server version is **7.0** and the minimum supported driver version is **5.7**.
 
 ## Installation
 
-mongodb adapter requires `mongodb` package as peer dependency, so you should install it manually along side with east through your package manager of choice:
+`mongodb` is a peer dependency, so install it alongside `east` and this adapter:
 
 ```sh
 npm install east @feedbackfruits/east-mongo mongodb
@@ -55,38 +52,33 @@ pnpm add east @feedbackfruits/east-mongo mongodb
 
 ## Usage
 
-Sample `.eastrc` content:
+Create an `.eastrc` file at the root of your project:
 
 ```js
 {
 	"adapter": "@feedbackfruits/east-mongo",
-	"url": "mongodb://localhost:27017/test",
-	"options": {
-		"server": {
-			"socketOptions": {
-				"socketTimeoutMS": 3600000
-			}
-		}
-	}
+	"url": "mongodb://localhost:27017/test"
 }
 ```
 
-Alternatively, pass in the options through the CLI:
-  
+You can also pass the adapter and URL directly via the CLI:
+
 ```sh
-east migrate --adapter east-mongo --url $MONGODB_URI
-# or, to run TS migrations
-yarn add -DE tsx
-tsx node_modules/east/bin/east.js migrate --adapter east-mongo --url $MONGODB_URI --migration-extension ts
+east migrate --adapter @feedbackfruits/east-mongo --url $MONGODB_URI
 ```
 
-Where `url` is url of database which you want to migrate (in 
-[mongodb native url connection format](http://mongodb.github.io/node-mongodb-native/driver-articles/mongoclient.html#the-url-connection-format)) and `options` is optional settings
-(see [connect method specification](http://mongodb.github.io/node-mongodb-native/3.5/api/MongoClient.html#.connect)).
+To run TypeScript migrations, use `tsx`:
 
-Migration files created with default `template` that comes with adapter will look like:
+```sh
+npm install -DE tsx
+tsx node_modules/east/bin/east.js migrate --adapter @feedbackfruits/east-mongo --url $MONGODB_URI --migration-extension ts
+```
 
-```js
+`url` should be a valid [MongoDB connection string](https://www.mongodb.com/docs/drivers/node/current/fundamentals/connection/connect/). For all available `options`, see the [MongoClientOptions reference](https://www.mongodb.com/docs/drivers/node/current/connect/connection-options/).
+
+Migrations created with the default template look like:
+
+```ts
 import type { MongoClient } from 'mongodb';
 
 exports.tags = [];
@@ -100,10 +92,4 @@ exports.rollback = async (client: MongoClient) => {
 };
 ```
 
-See east [cli](https://github.com/okv/east#cli-usage) or
-[library](https://github.com/okv/east#library-usage) usage for more details.
-
-
-## License
-
-MIT
+For more on running and managing migrations, see the east [CLI usage](https://github.com/okv/east#cli-usage) and [library usage](https://github.com/okv/east#library-usage) docs.
