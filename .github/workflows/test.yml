@@ -57,6 +57,6 @@ jobs:
         env:
           MONGODB_URI: mongodb://localhost:27017/east_mongo_test
       - name: Upload Coverage
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v6
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
