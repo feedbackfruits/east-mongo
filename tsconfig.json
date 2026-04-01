@@ -28,10 +28,9 @@
     "typings/tsd.d.ts"
   ],
   "exclude": [
+    "dist",
     "test/**/*.ts",
     "node_modules",
-    "typings/browser",
-    "typings/browser.d.ts",
     "migrationTemplates"
   ]
 }

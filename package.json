@@ -1,8 +1,8 @@
 {
   "name": "@feedbackfruits/east-mongo",
-  "description": "mongodb adapter for east (node.js database migration tool)",
+  "description": "Mongodb adapter for east, the Node.js migration tool",
   "author": "FeedbackFruits <media@feedbackfruits.com>",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -24,32 +24,38 @@
     "build": "tsc",
     "lint": "eslint \"./src/**/*.ts\" --max-warnings 0",
     "lint:tests": "eslint \"./test/**/*.ts\" --max-warnings 0",
-    "test": "NODE_ENV=test nyc tsx node_modules/jasmine/bin/jasmine \"test/**/*.spec.ts\""
+    "test": "NODE_ENV=test nyc tsx node_modules/jasmine/bin/jasmine \"test/**/*.spec.ts\"",
+    "prepare": "pnpm run build"
   },
   "peerDependencies": {
     "east": ">=2.0.0",
-    "mongodb": ">=4.0.0"
+    "mongodb": ">=5.7.0"
   },
   "devDependencies": {
-    "@feedbackfruits/eslint-config": "1.0.2",
+    "@feedbackfruits/eslint-config": "2.0.1",
     "@feedbackfruits/tsconfig": "1.0.2",
-    "@types/jasmine": "5.1.4",
-    "@types/node": "20.14.8",
-    "@typescript-eslint/eslint-plugin": "7.13.1",
-    "@typescript-eslint/parser": "7.13.1",
+    "@types/jasmine": "6.0.0",
+    "@types/node": "24.12.0",
+    "@typescript-eslint/eslint-plugin": "8.57.0",
+    "@typescript-eslint/parser": "8.57.0",
     "east": "2.0.3",
-    "eslint": "8.57.0",
-    "eslint-plugin-import": "2.29.1",
-    "eslint-plugin-jasmine": "4.2.0",
-    "jasmine": "5.1.0",
+    "eslint": "10.1.0",
+    "eslint-plugin-import": "2.32.0",
+    "eslint-plugin-jasmine": "4.2.2",
+    "jasmine": "6.1.0",
     "jasmine-spec-reporter": "7.0.0",
-    "mongodb": "6.7.0",
-    "nyc": "17.0.0",
-    "tsx": "4.15.7",
-    "typescript": "5.5.2"
+    "mongodb": "7.1.1",
+    "nyc": "18.0.0",
+    "tsx": "4.21.0",
+    "typescript": "5.9.3"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=22.0.0"
   },
-  "packageManager": "yarn@4.3.1"
+  "packageManager": "pnpm@10.33.0+sha512.10568bb4a6afb58c9eb3630da90cc9516417abebd3fabbe6739f0ae795728da1491e9db5a544c76ad8eb7570f5c4bb3d6c637b2cb41bfdcdb47fa823c8649319",
+  "dependencies": {
+    "@eslint/js": "^10.0.1",
+    "globals": "^17.4.0",
+    "typescript-eslint": "^8.57.2"
+  }
 }

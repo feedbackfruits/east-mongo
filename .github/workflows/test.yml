@@ -3,32 +3,35 @@ name: Test
 on: [push]
 
 env:
-  DEFAULT_NODE_VERSION: '20'
+  DEFAULT_NODE_VERSION: '24'
 
 jobs:
   lint:
     runs-on: ubuntu-latest
+    name: Lint
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Enable Corepack
         run: corepack enable
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: ${{ env.DEFAULT_NODE_VERSION }}
-          cache: 'yarn'
+          cache: 'pnpm'
       - name: Install dependencies
-        run: yarn
+        run: pnpm install
         env:
           GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
       - name: Lint
-        run: yarn lint
+        run: pnpm lint
   tests:
     runs-on: ubuntu-latest
+    name: Tests (node@${{ matrix.node_version }} - mongodb@${{ matrix.mongodb_version }} - driver@${{ matrix.mongodb_driver_version }})
     strategy:
       fail-fast: false
       matrix:
-        node_version: [18, 20, 22]
-        mongodb_driver_version: ['4.17.2', '5.5.0', '5.9.2', '6.7.0']
+        node_version: [22, 24]
+        mongodb_driver_version: ['5.9.2', '6.21.0', 'latest']
+        mongodb_version: ['7.0', '8.0']
     steps:
       - uses: actions/checkout@v4
       - name: Enable Corepack
@@ -36,19 +39,21 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node_version }}
-          cache: 'yarn'
+          cache: 'pnpm'
       - name: Install dependencies
-        run: yarn
+        run: pnpm install
         env:
           GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
       - name: Install MongoDB driver
-        run: yarn add -DE mongodb@${{ matrix.mongodb_driver_version }}; yarn
+        run: pnpm add -DE mongodb@${{ matrix.mongodb_driver_version }}; pnpm install
       - name: Compile app
-        run: yarn build
-      - uses: supercharge/mongodb-github-action@1.11.0
-      - uses: supercharge/redis-github-action@1.8.0
+        run: pnpm build
+      - uses: supercharge/mongodb-github-action@1.12.1
+        with:
+          mongodb-version: ${{ matrix.mongodb_version }}
+      - uses: supercharge/redis-github-action@1.8.1
       - name: Run tests
-        run: yarn test
+        run: pnpm test
         env:
           MONGODB_URI: mongodb://localhost:27017/east_mongo_test
       - name: Upload Coverage

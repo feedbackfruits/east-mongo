@@ -1,10 +1,11 @@
-# east mongo
+# east-mongo
+
+[![npm](https://img.shields.io/npm/v/@feedbackfruits/east-mongo.svg)](https://www.npmjs.org/package/@feedbackfruits/east-mongo)
 
 > [!NOTE]
 > This is a fork from https://github.com/okv/east-mongo, continued in Typescript with current versions of MongoDB
 
-Mongodb adapter for [east](https://github.com/okv/east), a Node.js database migration tool, which uses 
-the [mongodb native driver](http://mongodb.github.io/node-mongodb-native/) to perform migrations.
+Mongodb adapter for [east](https://github.com/okv/east), a Node.js database migration tool, which uses the [mongodb native driver](http://mongodb.github.io/node-mongodb-native/) to perform migrations.
 
 All executed migrations names will be stored at `_migrations` collection in the
 current database, where the `_id` for each document is the name of the executed migration. A pre-connected instance of `MongoClient` will be passed in to these migrations.
@@ -14,9 +15,9 @@ current database, where the `_id` for each document is the name of the executed 
 This default migration template will be used if `template` is not set. To override this behaviour and provide your own template, set `template` in your `.eastrc` file to the path of your template file:
 
 ```js
-	module.exports = {
-		template: require.resolve('east-mongo/lib/migrationTemplates/async.js')
-	}
+module.exports = {
+  template: require.resolve('east-mongo/lib/migrationTemplates/async.js')
+}
 ```
 
 or in Typescript
@@ -26,24 +27,30 @@ export default {
 }
 ```
 
-[![npm](https://img.shields.io/npm/v/@feedbackfruits/east-mongo.svg)](https://www.npmjs.org/package/@feedbackfruits/east-mongo)
-
 ## Node.js compatibility & MongoDB Driver compatibility
 
-east-mongo supports current, active and maintenance versions of node.js: https://nodejs.org/en/about/previous-releases
-Currently this means this package is tested against versions 18, 20 and 22.
+east-mongo supports current, active and maintenance versions of node.js: https://nodejs.org/en/about/previous-releases. Currently this means this package is tested against versions 22 and 24.
 
-For the MongoDB drivers, we follow language compatibility matrix from MongoDB: https://www.mongodb.com/docs/drivers/node/current/compatibility/#language-compatibility
-This currently means the minimum supported version is 4.x
+For the MongoDB version, we follow the support matrix and maintenance lifecycle:
+- Lifecycle: https://www.mongodb.com/legal/support-policy/lifecycles
+- Driver support matrix: https://www.mongodb.com/docs/drivers/compatibility/?driver-language=javascript&javascript-driver-framework=nodejs#mongodb-server-compatibility-11
+
+This currently means the minimum supported server version is 7.0, and the minimum supported driver version is 5.7.
 
 ## Installation
 
-mongodb adapter requires `mongodb` package as peer dependency, so you should install it manually along side with east:
+mongodb adapter requires `mongodb` package as peer dependency, so you should install it manually along side with east through your package manager of choice:
 
 ```sh
 npm install east @feedbackfruits/east-mongo mongodb
-# or 
+```
+
+```sh
 yarn add east @feedbackfruits/east-mongo mongodb
+``` 
+
+```sh
+pnpm add east @feedbackfruits/east-mongo mongodb
 ```
 
 ## Usage
