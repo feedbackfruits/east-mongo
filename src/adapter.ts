@@ -3,7 +3,9 @@ import { MongoClient, Db, Collection, ObjectId } from 'mongodb';
 
 import type { Adapter, AdapterConstructor } from 'east';
 
-class MongoAdapter implements Adapter<MongoClient> {
+import type { EastMongoParams } from './index';
+
+class MongoAdapter implements Adapter<EastMongoParams> {
   private params: { url: string; options?: object };
   private client: MongoClient | null;
   private db: Db | null;
@@ -22,13 +24,15 @@ class MongoAdapter implements Adapter<MongoClient> {
     return path.join(__dirname, '../migrationTemplates', 'async.ts');
   }
 
-  async connect(): Promise<MongoClient> {
-    const client = await MongoClient.connect(this.params.url, this.params.options)
-    this.client = client;
-    this.db = client.db();
+  async connect(): Promise<EastMongoParams> {
+    this.client = await MongoClient.connect(this.params.url, this.params.options);
+    this.db = this.client.db();
     this.collection = this.db.collection('_migrations');
 
-    return client;
+    return {
+      client: this.client,
+      db: this.db
+    }
   }
 
   async disconnect(): Promise<void> {
@@ -53,6 +57,6 @@ class MongoAdapter implements Adapter<MongoClient> {
 }
 
 // Type checking for the constructor
-const _: AdapterConstructor<MongoClient> = MongoAdapter;
+const _: AdapterConstructor<EastMongoParams> = MongoAdapter;
 
 export default MongoAdapter;
