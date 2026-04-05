@@ -33,7 +33,7 @@ jobs:
         mongodb_driver_version: ['5.9.2', '6.21.0', 'latest']
         mongodb_version: ['7.0', '8.0']
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Enable Corepack
         run: corepack enable
       - uses: actions/setup-node@v4
