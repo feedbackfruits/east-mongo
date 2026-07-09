@@ -3,9 +3,18 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "monthly"
+      interval: "weekly"
+      time: "05:00"
+      timezone: "Europe/Amsterdam"
+    cooldown:
+      default-days: 7
   - package-ecosystem: "npm"
     directory: "/"
-    schedule:
-      interval: "monthly"
     rebase-strategy: "auto"
+    schedule:
+      interval: "weekly"
+      time: "05:00"
+      timezone: "Europe/Amsterdam"
+    cooldown:
+      default-days: 7
+      semver-major-days: 14
