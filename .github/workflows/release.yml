@@ -7,7 +7,6 @@ on:
       - master
 
 permissions:
-  id-token: write
   contents: read
 
 env:
@@ -17,6 +16,8 @@ jobs:
   release:
     name: Release (GH)
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v6
       - name: Enable Corepack
@@ -35,6 +36,9 @@ jobs:
   release-npm:
     name: Release (NPM)
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - uses: actions/checkout@v6
       - name: Enable Corepack
