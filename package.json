@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "@feedbackfruits/eslint-config": "2.1.0",
-    "@feedbackfruits/tsconfig": "1.0.2",
+    "@feedbackfruits/tsconfig": "2.0.1",
     "@types/jasmine": "6.0.0",
     "@types/node": "25.9.5",
     "@typescript-eslint/eslint-plugin": "8.57.0",

@@ -27,8 +27,8 @@ importers:
         specifier: 2.1.0
         version: 2.1.0(@typescript-eslint/eslint-plugin@8.57.0(@typescript-eslint/parser@8.64.0(eslint@10.6.0)(typescript@5.9.3))(eslint@10.6.0)(typescript@5.9.3))(@typescript-eslint/parser@8.64.0(eslint@10.6.0)(typescript@5.9.3))(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.64.0(eslint@10.6.0)(typescript@5.9.3))(eslint@10.6.0))(eslint@10.6.0)
       '@feedbackfruits/tsconfig':
-        specifier: 1.0.2
-        version: 1.0.2
+        specifier: 2.0.1
+        version: 2.0.1
       '@types/jasmine':
         specifier: 6.0.0
         version: 6.0.0
@@ -345,8 +345,9 @@ packages:
       eslint: '>= 9'
       eslint-plugin-import: '>= 2'
 
-  '@feedbackfruits/tsconfig@1.0.2':
-    resolution: {integrity: sha512-PiPMhaAHhOj9rOwhhhtElemDseOMuB+vgAFEx6pCe/7Fa+A02rWRCXZRKarI8lhS/sCVPcGkMf73tGDYINnoCA==}
+  '@feedbackfruits/tsconfig@2.0.1':
+    resolution: {integrity: sha512-3X5Nhhz3PRuCCyt898mlSqT4FWMyWgiel5hJgGOTdymNA/JMAuMFntrBYK5lmTBeDjdDSICoud+efi070enLzA==}
+    engines: {node: 24.*}
 
   '@humanfs/core@0.19.2':
     resolution: {integrity: sha512-UhXNm+CFMWcbChXywFwkmhqjs3PRCmcSa/hfBgLIb7oQ5HNb1wS0icWsGtSAUNgefHeI+eBrA8I1fxmbHsGdvA==}
@@ -2045,7 +2046,7 @@ snapshots:
       eslint: 10.6.0
       eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.64.0(eslint@10.6.0)(typescript@5.9.3))(eslint@10.6.0)
 
-  '@feedbackfruits/tsconfig@1.0.2': {}
+  '@feedbackfruits/tsconfig@2.0.1': {}
 
   '@humanfs/core@0.19.2':
     dependencies:
