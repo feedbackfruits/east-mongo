@@ -18,6 +18,7 @@
     "noLib": false,
     "preserveConstEnums": true,
     "noImplicitReturns": false,
+    "verbatimModuleSyntax": false,
     "types": [
       "node",
       "jasmine"

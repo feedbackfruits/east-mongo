@@ -56,7 +56,4 @@ class MongoAdapter implements Adapter<EastMongoParams> {
   }
 }
 
-// Type checking for the constructor
-const _: AdapterConstructor<EastMongoParams> = MongoAdapter;
-
-export default MongoAdapter;
+export default MongoAdapter satisfies AdapterConstructor<EastMongoParams>;
