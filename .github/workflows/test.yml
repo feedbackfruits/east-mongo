@@ -19,8 +19,6 @@ jobs:
           cache: 'pnpm'
       - name: Install dependencies
         run: pnpm install
-        env:
-          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
       - name: Lint
         run: pnpm lint
   tests:
@@ -42,8 +40,6 @@ jobs:
           cache: 'pnpm'
       - name: Install dependencies
         run: pnpm install
-        env:
-          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
       - name: Install MongoDB driver
         run: pnpm add -DE mongodb@${{ matrix.mongodb_driver_version }}; pnpm install
       - name: Compile app
