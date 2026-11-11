@@ -3,6 +3,9 @@
 # Docs: https://gh.io/actions-lockfile
 version: 'v0.0.3'
 workflows:
+    '.github/workflows/lint-github-actions.yml':
+        - 'actions/checkout@v7.0.1'
+        - 'zizmorcore/zizmor-action@v0.8.1'
     '.github/workflows/release.yml':
         - 'actions/checkout@v7.0.1'
         - 'actions/setup-node@v7.0.0'
@@ -12,9 +15,6 @@ workflows:
         - 'codecov/codecov-action@v7.0.0'
         - 'supercharge/mongodb-github-action@1.12.1'
         - 'supercharge/redis-github-action@1.8.1'
-    '.github/workflows/zizmor.yml':
-        - 'actions/checkout@v7.0.1'
-        - 'zizmorcore/zizmor-action@v0.8.1'
 dependencies:
     'actions/checkout@v7.0.1':
         ref: 'v7.0.1'
